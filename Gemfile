@@ -55,6 +55,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Custom gems
 gem 'devise'
+gem 'bootstrap'
+gem 'jquery-rails'
 
 group :development do
   gem 'pry'

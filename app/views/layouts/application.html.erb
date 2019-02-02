@@ -9,8 +9,34 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item"><%= link_to "Home".html_safe, root_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Upload CSV".html_safe, new_identifiers_path, class: "nav-link" %></li>
+                <li class="nav-item">
+                  <%= link_to "Logout".html_safe, destroy_user_session_path, method: :delete, class: "nav-link" %>
+                </li>
+              <% else %>
+                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link"  %></li>
+                <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "nav-link"  %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+      <div class="container">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

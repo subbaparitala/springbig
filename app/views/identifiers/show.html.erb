@@ -1,50 +1,16 @@
-<h1><%= @identifier.name %> with success record </h1>
-<table>
-  <th>
-  <td> Row # </td>
-  <td> First Name </td>
-  <td> Last Name </td>
-  <td> Phone </td>
-  <td> Email </td>
-
-  </th>
+<h1 class="text-center"><%= @identifier.name %> with success record </h1>
+<table class="table table-striped">
+  <%= render partial: '/identifiers/csv_data_header' %>
   <tbody>
-  <% @success_datas.each do |data| %>
-    <tr>
-      <td><%= data.row_id %></td>
-      <td><%= data.first %></td>
-      <td><%= data.last %></td>
-      <td><%= data.phone %></td>
-      <td><%= data.email %></td>
-      <td><%= data.message || '-' %></td>
-    </tr>
-  <% end %>
+  <%= render partial: '/identifiers/csv_data_table', collection: @error_datas, as: :data %>
   </tbody>
 </table>
 
-
-<h1><%= @identifier.name %> with error record </h1>
-<table>
-  <th>
-  <td> Row # </td>
-  <td> First Name </td>
-  <td> Last Name </td>
-  <td> Phone </td>
-  <td> Email </td>
-  <td> Messages </td>
-
-  </th>
+<h1 class="text-center"><%= @identifier.name %> with error record </h1>
+<table class="table table-striped">
+  <%= render partial: '/identifiers/csv_data_header' %>
   <tbody>
-  <% @error_datas.each do |data| %>
-    <tr>
-      <td><%= data.row_id %></td>
-      <td><%= data.first %></td>
-      <td><%= data.last %></td>
-      <td><%= data.phone %></td>
-      <td><%= data.email %></td>
-      <td><%= data.message %></td>
-    </tr>
-  <% end %>
+    <%= render partial: '/identifiers/csv_data_table', collection: @error_datas, as: :data %>
   </tbody>
 </table>
 
