@@ -1,3 +1,5 @@
+require 'csv'
+
 class Identifier < ApplicationRecord
   belongs_to :user
   has_many :csv_datas
@@ -9,16 +11,16 @@ class Identifier < ApplicationRecord
     raise 'Atleast one row should be exist in the CSV' if row_count < 1
     CSV.foreach(file.path, headers: true) do |row|
       index = ($. - 1)
-      str_hash = row.to_h.merge(row: index).merge(record)
+      str_hash = row.to_h.merge(row_id: index).merge(record)
       attrs = ActiveSupport::HashWithIndifferentAccess.new(str_hash)
-      validator = Validator.new(attrs)
+      validator = RowValidator.new(attrs)
       unless validator.valid?
         attrs[:message] = validator.errors.full_messages.join('. ')
         attrs[:is_failed] = true
       end
-      csv_data = CsvData.find_by(row: index, identifier: identifier)
-      cp = if csv_data.present? && csv_data.is_failed == true
-             if validator.valid?
+      csv_data = CsvData.find_by(row_id: index, identifier: identifier)
+      cp = if csv_data.present?
+             if validator.valid? && csv_data.is_failed == true
                attrs[:message] = 'data corrected.'
                attrs[:is_failed] = false
              end

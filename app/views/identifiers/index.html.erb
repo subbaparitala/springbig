@@ -1,7 +1,7 @@
 <h1>Identifiers</h1>
 <% @identifiers.each do |identifier| %>
   <div>
-    <%= link_to "#{identifier.name.presence || 'UnNamed Identifier'}", identifiers_path(identifier) %> - <% identifier.user&.email %>
+    <%= link_to "#{identifier.name.presence || 'UnNamed Identifier'}", identifier_path(identifier) %> - <% identifier.user&.email %>
   </div>
 <% end %>
 
