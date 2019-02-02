@@ -1,1 +1,9 @@
-<h1>Index</h1>
+<h1>Identifiers</h1>
+<% @identifiers.each do |identifier| %>
+  <div>
+    <%= link_to "#{identifier.name.presence || 'UnNamed Identifier'}", identifiers_path(identifier) %> - <% identifier.user&.email %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Upload CSV', new_identifiers_path %>

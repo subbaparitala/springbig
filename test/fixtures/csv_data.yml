@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  row_id: 1
+  first: MyString
+  last: MyString
+  phone: MyString
+  email: MyString
+  message: MyText
+  is_failed: false
+  identifier: one
+
+two:
+  row_id: 1
+  first: MyString
+  last: MyString
+  phone: MyString
+  email: MyString
+  message: MyText
+  is_failed: false
+  identifier: two
