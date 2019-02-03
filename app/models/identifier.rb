@@ -1,35 +1,6 @@
-require 'csv'
-
 class Identifier < ApplicationRecord
   belongs_to :user
-  has_many :csv_datas
-  validates :name, presence: true
-
-  def self.import(file, identifier)
-    record = {identifier: identifier}
-    row_count = CSV.foreach(file.path, headers: true).count
-    raise 'Atleast one row should be exist in the CSV' if row_count < 1
-    CSV.foreach(file.path, headers: true) do |row|
-      index = ($. - 1)
-      str_hash = row.to_h.merge(row_id: index).merge(record)
-      attrs = ActiveSupport::HashWithIndifferentAccess.new(str_hash)
-      validator = RowValidator.new(attrs)
-      unless validator.valid?
-        attrs[:message] = validator.errors.full_messages.join('. ')
-        attrs[:is_failed] = true
-      end
-      csv_data = CsvData.find_by(row_id: index, identifier: identifier)
-      cp = if csv_data.present?
-             if validator.valid? && csv_data.is_failed == true
-               attrs[:message] = 'data corrected.'
-               attrs[:is_failed] = false
-             end
-             csv_data.update_attributes(attrs)
-           elsif !csv_data.present?
-             CsvData.create!(attrs)
-           end
-      puts "*" * 50, cp.inspect
-    end
-  end
+  has_many :csv_datas, dependent: :destroy
+  validates :name, presence: true, format: { with: /\A[a-zA-Z0-9]*\Z/,  message: "special character are not allowed." }
 
 end
