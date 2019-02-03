@@ -10,7 +10,7 @@
   <tbody>
     <% @identifiers.each_with_index do |identifier, idx| %>
       <tr>
-        <td><%= idx %></td>
+        <td><%= idx + 1 %></td>
         <td><%= identifier.name.presence || 'UnNamed Identifier' %></td>
         <td><%= link_to "View Datas", identifier_path(identifier), class: 'btn btn-primary' %></td>
       </tr>
