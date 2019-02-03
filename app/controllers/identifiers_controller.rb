@@ -25,7 +25,6 @@ class IdentifiersController < ApplicationController
         redirect_to root_path, notice: "Failed to process your request."
       end
     rescue => e
-      puts '*' * 40, e.message, e.backtrace, '*' * 40
       redirect_to new_identifiers_path, alert: e.message
     end
   end

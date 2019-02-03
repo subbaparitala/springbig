@@ -59,6 +59,9 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'sidekiq'
 
-group :development do
+group :development, :test do
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'factory_bot'
+  gem 'rails-controller-testing'
 end
