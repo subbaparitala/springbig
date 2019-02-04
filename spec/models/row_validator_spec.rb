@@ -40,7 +40,7 @@ describe RowValidator do
         first: 'first name',
         last: 'last name',
         phone: '(123)321-3123',
-        email: 'gklsan@gklsan.in',
+        email: 'krishna@krishna.in',
         identifier_id: 1
       }
     }
